@@ -15,6 +15,8 @@ import Sidebar from "./components/Sidebar";
 import Controls from "./components/Controls";
 import { FaPlay, FaPause } from "react-icons/fa";
 import sampleProjection from "../public/sampleProjection.json";
+import { API_BASE } from "./config";
+import ApiTester from "./ApiTester";
 
 export default function App() {
   const [projection, setProjection] = useState(null);
@@ -42,7 +44,7 @@ export default function App() {
     if (savedUser) {
       const { user_id } = JSON.parse(savedUser);
 
-      fetch(`https://mhacks-2025.onrender.com/projections/${user_id}`)
+      fetch(`${API_BASE}/projections/${user_id}`)
         .then((res) => {
           if (!res.ok) throw new Error("No projection found");
           return res.json();

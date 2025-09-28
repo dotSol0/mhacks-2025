@@ -5,6 +5,7 @@ export default function HeartModal({ isOpen, currentYear, projection }) {
   if (!isOpen) return null;
 
   const currentData = projection?.[currentYear] || null;
+  console.log(currentData);
   const animals = currentData?.animals || {};
 
   const getBarColor = (value) => {
@@ -36,7 +37,7 @@ export default function HeartModal({ isOpen, currentYear, projection }) {
           fontSize: "18px",
         }}
       >
-        Animal Health – {currentYear}
+        Animal Health - {currentYear}
       </h3>
 
       {Object.keys(animals).length === 0 ? (

@@ -18,7 +18,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://carbonscape.onrender.com"],
+    allow_origins=["https://carbonscape.onrender.com", "http://localhost:5173", "http://127.0.0.1:5173"],
     allow_credentials=True,
     allow_methods=["*"],   # allow POST, GET, etc.
     allow_headers=["*"],
@@ -40,10 +40,13 @@ class Action(BaseModel):
 
 @app.post("/login")
 def login(user: UserLogin):
-    existing = supabase.table("users").select("*").eq("email", user.email).execute()
-    if existing.data:
-        return {"status": "ok", "mode": "login", "user_id": existing.data[0]["id"]}
-    raise HTTPException(status_code=404, detail="No user found")
+    try:
+        existing = supabase.table("users").select("*").eq("email", user.email).execute()
+        if existing.data:
+            return {"status": "ok", "mode": "login", "user_id": existing.data[0]["id"]}
+        # raise HTTPException(status_code=404, detail="No user found")
+    except Exception as e:
+        print(e)
 
 
 @app.post("/signup")

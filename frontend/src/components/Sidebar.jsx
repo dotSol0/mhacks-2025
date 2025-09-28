@@ -36,12 +36,12 @@ export default function Sidebar({ currentYear, setProjection }) {
           onClick={() => setHazardOpen(true)}
         />
 
-        {/* <FaRobot
+        <FaRobot
           size={28}
           color="#2E8B57"
           cursor="pointer"
           onClick={() => setAISuggestionsOpen(true)}
-        /> */}
+        />
 
         <FaHeart
           size={28}

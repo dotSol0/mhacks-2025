@@ -1,6 +1,7 @@
 // src/components/HazardModal.jsx
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
+import axios from "axios";
 
 Modal.setAppElement("#root");
 
@@ -30,6 +31,7 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
   const [newCount, setNewCount] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("carbonscapeUser");
@@ -37,103 +39,94 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
       const parsed = JSON.parse(savedUser);
       setUserId(parsed.user_id);
 
-      fetch(`https://mhacks-2025.onrender.com/items/${parsed.user_id}`)
-        .then((res) => res.json())
-        .then((data) => setUserItems(data.items || {}))
+      axios
+        .get(`http://localhost:8000/items/${parsed.user_id}`)
+        .then((res) => setUserItems(res.data.items || {}))
         .catch(() => setUserItems({}));
     }
   }, []);
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
-      const res = await fetch("https://mhacks-2025.onrender.com/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      if (res.ok && data.status === "ok") {
-        setUserId(data.user_id);
-        localStorage.setItem("carbonscapeUser", JSON.stringify(data));
-        fetch(`https://mhacks-2025.onrender.com/items/${data.user_id}`)
-          .then((r) => r.json())
-          .then((d) => setUserItems(d.items || {}));
+      const res = await axios.post("http://localhost:8000/login", { email });
+      if (res.data.status === "ok") {
+        setUserId(res.data.user_id);
+        localStorage.setItem("carbonscapeUser", JSON.stringify(res.data));
+        const itemsRes = await axios.get(
+          `http://localhost:8000/items/${res.data.user_id}`
+        );
+        setUserItems(itemsRes.data.items || {});
         setError("");
       } else {
-        setError(data.detail || "Login failed.");
+        setError(res.data.detail || "Login failed.");
       }
-    } catch {
-      setError("Server not reachable.");
+    } catch (err) {
+      setError(err.response?.data?.detail || "Server not reachable.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSignup = async () => {
+    setLoading(true);
     try {
-      const res = await fetch("https://mhacks-2025.onrender.com/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email }),
+      const res = await axios.post("http://localhost:8000/signup", {
+        name,
+        email,
       });
-      const data = await res.json();
-      if (res.ok && data.status === "ok") {
-        setUserId(data.user_id);
-        localStorage.setItem("carbonscapeUser", JSON.stringify(data));
+      if (res.data.status === "ok") {
+        setUserId(res.data.user_id);
+        localStorage.setItem("carbonscapeUser", JSON.stringify(res.data));
         setError("");
       } else {
-        setError(data.detail || "Signup failed.");
+        setError(res.data.detail || "Signup failed.");
       }
-    } catch {
-      setError("Server not reachable.");
+    } catch (err) {
+      setError(err.response?.data?.detail || "Server not reachable.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handlePredict = async () => {
+    setLoading(true);
     try {
-      const res = await fetch(
-        `https://mhacks-2025.onrender.com/projection/${userId}`
+      const res = await axios.get(`http://localhost:8000/projection/${userId}`);
+      localStorage.setItem(
+        "carbonscapeProjection",
+        JSON.stringify(res.data.projection)
       );
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem(
-          "carbonscapeProjection",
-          JSON.stringify(data.projection)
-        );
-        setProjection(data.projection);
-        onClose();
-      }
+      setProjection(res.data.projection);
+      onClose();
     } catch {
       setError("Prediction failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleAddItem = async () => {
     if (!selectedItem || !newCount) return;
+    setLoading(true);
     try {
-      const res = await fetch(
-        `https://mhacks-2025.onrender.comitems/${userId}`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            items: { [selectedItem]: parseFloat(newCount) },
-          }),
-        }
-      );
-      const data = await res.json();
-      if (res.ok) {
-        setUserItems(data.items);
-        if (data.projection) {
-          setProjection(data.projection);
-          localStorage.setItem(
-            "carbonscapeProjection",
-            JSON.stringify(data.projection)
-          );
-        }
-        setSelectedItem("");
-        setNewCount("");
+      const res = await axios.patch(`http://localhost:8000/items/${userId}`, {
+        items: { [selectedItem]: parseFloat(newCount) },
+      });
+      setUserItems(res.data.items);
+      if (res.data.projection) {
+        setProjection(res.data.projection);
+        localStorage.setItem(
+          "carbonscapeProjection",
+          JSON.stringify(res.data.projection)
+        );
       }
+      setSelectedItem("");
+      setNewCount("");
     } catch {
       setError("Add failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -151,122 +144,84 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
       onRequestClose={onClose}
       style={{
         content: {
-          width: "40%",
-          height: "60%",
+          width: "420px",
+          maxHeight: "70%",
           margin: "auto",
           background: "#013220",
           borderRadius: "16px",
-          padding: "30px",
+          padding: "24px",
           color: "#2E8B57",
           fontFamily: "'Montserrat', sans-serif",
-          fontSize: "18px",
+          fontSize: "16px",
           border: "2px solid #2E8B57",
+          overflow: "auto",
         },
         overlay: { backgroundColor: "rgba(0,0,0,0.7)", zIndex: 1000 },
       }}
     >
-      <h2 style={{ color: "#2E8B57", fontSize: "28px", marginBottom: "20px" }}>
-        Manage Your Items
+      <h2
+        style={{
+          color: "#2E8B57",
+          fontSize: "26px",
+          marginBottom: "16px",
+          textAlign: "center",
+        }}
+      >
+        {userId ? "Your Items" : "Login / Signup"}
       </h2>
 
       {!userId ? (
         <>
-          <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>
-            Login / Sign Up
-          </h3>
           <input
             type="text"
-            placeholder="Enter name (for signup)"
+            placeholder="Name (for signup)"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{
-              width: "100%",
-              marginBottom: "10px",
-              padding: "8px",
-              borderRadius: "6px",
-              border: "1px solid #2E8B57",
-              background: "#013220",
-              color: "#2E8B57",
-            }}
+            style={inputStyle}
           />
           <input
             type="email"
-            placeholder="Enter email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: "100%",
-              marginBottom: "10px",
-              padding: "8px",
-              borderRadius: "6px",
-              border: "1px solid #2E8B57",
-              background: "#013220",
-              color: "#2E8B57",
-            }}
+            style={inputStyle}
           />
-          <div style={{ display: "flex", gap: "12px" }}>
-            <button
-              onClick={handleLogin}
-              style={{
-                flex: 1,
-                padding: "10px",
-                borderRadius: "6px",
-                border: "none",
-                background: "#2E8B57",
-                color: "#013220",
-                cursor: "pointer",
-              }}
-            >
-              Login
+          <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+            <button onClick={handleLogin} style={btnPrimary} disabled={loading}>
+              {loading ? "..." : "Login"}
             </button>
             <button
               onClick={handleSignup}
-              style={{
-                flex: 1,
-                padding: "10px",
-                borderRadius: "6px",
-                border: "none",
-                background: "#2E8B57",
-                color: "#013220",
-                cursor: "pointer",
-              }}
+              style={btnPrimary}
+              disabled={loading}
             >
-              Sign Up
+              {loading ? "..." : "Sign Up"}
             </button>
           </div>
-          {error && <p style={{ marginTop: "12px" }}>{error}</p>}
         </>
       ) : (
         <>
-          {Object.keys(userItems).length > 0 ? (
-            <ul style={{ listStyle: "none", padding: 0, marginBottom: "20px" }}>
-              {Object.entries(userItems).map(([item, count]) => (
-                <li
-                  key={item}
-                  style={{ marginBottom: "10px", fontSize: "18px" }}
-                >
-                  {count} × {item}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No items found.</p>
-          )}
+          <ul
+            style={{
+              listStyle: "none",
+              padding: 0,
+              marginBottom: "16px",
+              maxHeight: "120px",
+              overflowY: "auto",
+            }}
+          >
+            {Object.entries(userItems).map(([item, count]) => (
+              <li key={item} style={{ marginBottom: "8px" }}>
+                {count} × {item}
+              </li>
+            ))}
+          </ul>
 
-          <div style={{ marginBottom: "20px" }}>
-            <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>
-              ➕ Add Item
-            </h3>
+          <div style={{ marginBottom: "16px" }}>
             <select
               value={selectedItem}
               onChange={(e) => setSelectedItem(e.target.value)}
-              style={{
-                padding: "8px",
-                borderRadius: "6px",
-                border: "1px solid #2E8B57",
-                background: "#013220",
-                color: "#2E8B57",
-              }}
+              style={inputStyle}
             >
               <option value="">-- Select Item --</option>
               {ITEM_OPTIONS.map((opt) => (
@@ -280,75 +235,71 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
               placeholder="Count"
               value={newCount}
               onChange={(e) => setNewCount(e.target.value)}
-              style={{
-                marginLeft: "10px",
-                width: "100px",
-                padding: "8px",
-                borderRadius: "6px",
-                border: "1px solid #2E8B57",
-                background: "#013220",
-                color: "#2E8B57",
-              }}
+              style={{ ...inputStyle, marginTop: "8px" }}
             />
             <button
               onClick={handleAddItem}
-              style={{
-                marginLeft: "12px",
-                padding: "8px 14px",
-                borderRadius: "6px",
-                border: "none",
-                background: "#2E8B57",
-                color: "#013220",
-                cursor: "pointer",
-              }}
+              style={{ ...btnPrimary, width: "100%", marginTop: "10px" }}
+              disabled={loading}
             >
-              Add
+              {loading ? "..." : "Add Item"}
             </button>
           </div>
 
-          <div style={{ marginTop: "auto", display: "flex", gap: "12px" }}>
+          <div style={{ display: "flex", gap: "10px" }}>
             <button
               onClick={handlePredict}
-              style={{
-                flex: 1,
-                padding: "10px",
-                borderRadius: "6px",
-                border: "none",
-                background: "#2E8B57",
-                color: "#013220",
-              }}
+              style={btnPrimary}
+              disabled={loading}
             >
-              Predict
+              {loading ? "..." : "Predict"}
             </button>
-            <button
-              onClick={handleLogout}
-              style={{
-                flex: 1,
-                padding: "10px",
-                borderRadius: "6px",
-                border: "1px solid #2E8B57",
-                background: "transparent",
-                color: "#2E8B57",
-              }}
-            >
+            <button onClick={handleLogout} style={btnSecondary}>
               Logout
             </button>
-            <button
-              onClick={onClose}
-              style={{
-                flex: 1,
-                padding: "10px",
-                borderRadius: "6px",
-                border: "1px solid #2E8B57",
-                background: "transparent",
-                color: "#2E8B57",
-              }}
-            >
+            <button onClick={onClose} style={btnSecondary}>
               Close
             </button>
           </div>
         </>
       )}
+
+      {error && (
+        <p style={{ marginTop: "12px", color: "#e74c3c", textAlign: "center" }}>
+          {error}
+        </p>
+      )}
     </Modal>
   );
 }
+
+// shared styles
+const inputStyle = {
+  width: "100%",
+  padding: "8px",
+  borderRadius: "6px",
+  border: "1px solid #2E8B57",
+  background: "#013220",
+  color: "#2E8B57",
+  marginBottom: "8px",
+};
+
+const btnPrimary = {
+  flex: 1,
+  padding: "10px",
+  borderRadius: "6px",
+  border: "none",
+  background: "#2E8B57",
+  color: "#013220",
+  cursor: "pointer",
+};
+
+const btnSecondary = {
+  flex: 1,
+  padding: "10px",
+  borderRadius: "6px",
+  border: "1px solid #2E8B57",
+  background: "transparent",
+  color: "#2E8B57",
+  cursor: "pointer",
+};

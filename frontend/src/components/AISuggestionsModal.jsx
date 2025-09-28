@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Modal from "react-modal";
 import { FaLightbulb, FaSpinner } from "react-icons/fa";
+import { API_BASE } from "../config";
 
 Modal.setAppElement("#root");
 
@@ -22,7 +23,7 @@ export default function AISuggestionsModal({
     setAlertMsg("");
     try {
       const response = await fetch(
-        `https://mhacks-2025.onrender.com/ai_suggestions/${userId}?year=${currentYear}`
+        `${API_BASE}/ai_suggestions/${userId}?year=${currentYear}`
       );
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
@@ -44,18 +45,15 @@ export default function AISuggestionsModal({
     setActionLoading(JSON.stringify(impact));
     setAlertMsg("");
     try {
-      const response = await fetch(
-        `https://mhacks-2025.onrender.com/take_action/${userId}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            year: parseInt(currentYear),
-            action_type: actionType,
-            impact,
-          }),
-        }
-      );
+      const response = await fetch(`${API_BASE}/take_action/${userId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          year: parseInt(currentYear),
+          action_type: actionType,
+          impact,
+        }),
+      });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       console.log("Take action result:", data);
