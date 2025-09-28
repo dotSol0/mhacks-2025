@@ -1,0 +1,24 @@
+[
+  {
+    "id": "person_1",
+    "name": "Alice",
+    "age": 28,
+    "location": "City A",
+    "behaviors": [
+      {"item_id": "car_gasoline", "frequency_per_year": 3000, "units_per_use": 1},
+      {"item_id": "beef_steak", "frequency_per_year": 20, "units_per_use": 1}
+    ],
+    "estimated_annual_co2_kg": 0.0
+  },
+  {
+    "id": "person_2",
+    "name": "Bob",
+    "age": 35,
+    "location": "Town B",
+    "behaviors": [
+      {"item_id": "car_gasoline", "frequency_per_year": 1500, "units_per_use": 1},
+      {"item_id": "plastic_bottle", "frequency_per_year": 200, "units_per_use": 1}
+    ],
+    "estimated_annual_co2_kg": 0.0
+  }
+]
