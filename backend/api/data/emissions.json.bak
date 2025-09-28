@@ -1,0 +1,30 @@
+[
+  {
+    "id": "car_gasoline",
+    "name": "Gasoline car (per km)",
+    "category": "vehicle",
+    "co2_kg_per_unit": 0.192,
+    "description": "Approx kg CO2 emitted per vehicle-km for an average gasoline car"
+  },
+  {
+    "id": "beef_steak",
+    "name": "Beef (per serving)",
+    "category": "food",
+    "co2_kg_per_unit": 27.0,
+    "description": "kg CO2 per typical serving of beef (life-cycle)"
+  },
+  {
+    "id": "plane_flight",
+    "name": "Short flight (per passenger, one-way)",
+    "category": "transport",
+    "co2_kg_per_unit": 150.0,
+    "description": "Approx emissions for a short-haul flight per passenger"
+  },
+  {
+    "id": "plastic_bottle",
+    "name": "Plastic water bottle (1)",
+    "category": "product",
+    "co2_kg_per_unit": 0.1,
+    "description": "Embodied emissions per single-use plastic bottle"
+  }
+]

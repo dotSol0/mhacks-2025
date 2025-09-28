@@ -1,24 +1,184 @@
 [
   {
-    "id": "person_1",
-    "name": "Alice",
-    "age": 28,
-    "location": "City A",
-    "behaviors": [
-      {"item_id": "car_gasoline", "frequency_per_year": 3000, "units_per_use": 1},
-      {"item_id": "beef_steak", "frequency_per_year": 20, "units_per_use": 1}
-    ],
-    "estimated_annual_co2_kg": 0.0
-  },
-  {
-    "id": "person_2",
-    "name": "Bob",
-    "age": 35,
-    "location": "Town B",
-    "behaviors": [
-      {"item_id": "car_gasoline", "frequency_per_year": 1500, "units_per_use": 1},
-      {"item_id": "plastic_bottle", "frequency_per_year": 200, "units_per_use": 1}
-    ],
-    "estimated_annual_co2_kg": 0.0
-  }
+  "textboxes": [
+    {
+      "id": "p1",
+      "name": "Alice",
+      "age": 9,
+      "location": "Detroit, MI",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "Alice loves playing outside! She plays tag every day with her friends, goes swimming in the town lake, and takes walks with her grandma."
+        },
+        {
+          "description_2": "Alice still plays outside sometimes, but her summer days feel hotter and harder. Her town has more storms and sometimes her park is too wet or too dry to play in."
+        },
+        {
+          "description_3": "Alice’s summers are very hot, and storms often stop her from playing outside. Sometimes her school closes because of floods or heatwaves, and she hears her parents talk about water shortages."
+        },
+        {
+          "description_4": "Alice rarely plays outside anymore because it’s too hot or stormy. Her town changes a lot — lakes shrink, forests get smaller, and her friends have moved away to safer places."
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "Ms. Iyer",
+      "age": 33,
+      "location": "Singapore",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "Ms. Iyer is an elementary school teacher in the island city of Singapore. She lives in a lakeside house with her husband, infant son and 2 cats, and loves to fish and go on nature hikes."
+        },
+        {
+          "description_2": "The weather is warmer than before, and Ms. Iyer has to use fans more often at school. Heavy rains sometimes make it harder to go hiking, but she still enjoys her weekends outdoors."
+        },
+        {
+          "description_3": "The heat makes teaching tiring, and stronger storms sometimes close her school. Fishing trips with her husband happen less often because the lakes and rivers flood more easily."
+        },
+        {
+          "description_4": "Ms. Iyer’s house has flooded and her family had to move to a shelter inland. Many of her favorite hiking trails are gone, and her son plays inside most days."
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Lola",
+      "age": 67,
+      "location": "Miami, Florida",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "The proud grandmother of Alice. She likes taking walks in the clear air here to help with her athsma and enjoys staying at home reading books and cooking."
+        },
+        {
+          "description_2": "Lola still enjoys her walks, but the hot afternoons mean she goes out earlier in the morning, or else she faces a slight difficulty breathing."
+        },
+        {
+          "description_3": "Floods and hurricanes damage homes nearby, and Lola worries about keeping her family safe while dealing with more athsma attacks."
+        },
+        {
+          "description_4": "Lola’s home may not be safe anymore: the basement has flooded several times ruining her favorite books, and her family talks about moving to another place."
+        }
+      ]
+    },
+    {
+      "id": "a2",
+      "name": "apple trees",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "Trees. They're fun to climb and they give tasty apples."
+        },
+        {
+          "description_2": "Storms and dry spells make it harder for the trees to stay healthy, and sometimes their fruit doesn’t taste as sweet."
+        },
+        {
+          "description_3": "Many trees lose their blossoms before apples can grow, and farmers work hard just to keep the trees alive in the heat."
+        },
+        {
+          "description_4": "Most apple trees can’t survive the changing weather here anymore, so people have to find other fruits to eat instead."
+        }
+      ]
+    },
+    {
+      "id": "e1",
+      "name": "pond",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "Ponds. They're great to swim in and have so much fishes and seaweed!"
+        },
+        {
+          "description_2": "The pond gets a bit warmer, and sometimes there are more bugs, but kids still splash and play."
+        },
+        {
+          "description_3": "Hotter days dry up parts of the pond, and some fish struggle to live there."
+        },
+        {
+          "description_4": "The pond has almost dried up, and only a few creatures can survive in the water left behind."
+        }
+      ]
+    },
+    {
+      "id": "a3",
+      "name": "fox",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "Foxes are clever animals that play, run, and find food in the forest."
+        },
+        {
+          "description_2": "Foxes still hunt, but hotter summers mean they rest in the shade more often."
+        },
+        {
+          "description_3": "Storms and floods make it harder for foxes to find food, so they sometimes wander into towns."
+        },
+        {
+          "description_4": "Fox families lose parts of their forest homes and can't survive there anymore, and they must travel far to find safe places to live."
+        }
+      ]
+    },
+    {
+      "id": "a4",
+      "name": "deer",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "Deer run through the woods and eat grass and leaves in the meadows."
+        },
+        {
+          "description_2": "Storms and dry weather make food harder to find, and deer travel farther to eat."
+        },
+        {
+          "description_3": "Many deer lose parts of their forest, and they sometimes come close to towns to look for food."
+        },
+        {
+          "description_4": "Deer have trouble surviving as their forests shrink, and only a few are left in safe areas."
+        }
+      ]
+    },
+    {
+      "id": "a5",
+      "name": "bird",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "Birds sing in the trees, build nests, and fly across the skies."
+        },
+        {
+          "description_2": "Birds still sing, but hotter weather makes them rest in the shade during the day."
+        },
+        {
+          "description_3": "Storms knock down nests, and birds sometimes can’t find as many insects to eat. Some must fly farther to find food."
+        },
+        {
+          "description_4": "Fewer birds live here now, and some kinds disappear from the skies completely."
+        }
+      ]
+    },
+    {
+      "id": "a6",
+      "name": "fishes",
+      "descriptions": [
+        {
+          "state": "healthy",
+          "description_1": "Fishes swim in schools through the water, shining in the sun as they play and eat."
+        },
+        {
+          "description_2": "The water gets warmer, and some fish swim deeper to stay cool."
+        },
+        {
+          "description_3": "Storms and heat make the water murky, and some fish get sick more often. Some fish start disappearing from restaurant menus."
+        },
+        {
+          "description_4": "Most fish cannot survive in the overheated waters, and only a few tough ones are left behind. Fish like salmon become a rarity in grocery stores."
+        }
+      ]
+    }
+  ]
+}
+
 ]

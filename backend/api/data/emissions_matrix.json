@@ -1,11 +1,7 @@
-[
-  {
-    "id": "drive_gas_car_30mi_daily",
-    "name": "Drive gas car 30mi daily",
-    "category": "vehicle",
-    "co2_kg_per_unit": 3066.0,
-    "description": "Auto-generated from emissions_matrix action drive_gas_car_30mi_daily",
-    "emissions_matrix": {
+{
+  "actions": [
+    {
+      "name": "drive_gas_car_30mi_daily",
       "one_person_day": 8.4,
       "twenty_person_day": 168.0,
       "all_day": 67200000000.0,
@@ -16,15 +12,9 @@
       "twenty_person_50_y": 3066.0,
       "all_50_y": 1224000000000.0,
       "ppm_all_50_y": 157.0
-    }
-  },
-  {
-    "id": "drive_ev_30mi_daily",
-    "name": "Drive ev 30mi daily",
-    "category": "vehicle",
-    "co2_kg_per_unit": 1314.0,
-    "description": "Auto-generated from emissions_matrix action drive_ev_30mi_daily",
-    "emissions_matrix": {
+    },
+    {
+      "name": "drive_ev_30mi_daily",
       "one_person_day": 3.6,
       "twenty_person_day": 72.0,
       "all_day": 28800000000.0,
@@ -35,15 +25,9 @@
       "twenty_person_50_y": 1314.0,
       "all_50_y": 524000000000.0,
       "ppm_all_50_y": 67.25
-    }
-  },
-  {
-    "id": "eat_hamburger_daily",
-    "name": "Eat hamburger daily",
-    "category": "food",
-    "co2_kg_per_unit": 1168.0,
-    "description": "Auto-generated from emissions_matrix action eat_hamburger_daily",
-    "emissions_matrix": {
+    },
+    {
+      "name": "eat_hamburger_daily",
       "one_person_day": 3.2,
       "twenty_person_day": 64.0,
       "all_day": 25600000000.0,
@@ -54,15 +38,9 @@
       "twenty_person_50_y": 1168.0,
       "all_50_y": 467250000000.0,
       "ppm_all_50_y": 60.0
-    }
-  },
-  {
-    "id": "eat_chicken_tenders_daily",
-    "name": "Eat chicken tenders daily",
-    "category": "food",
-    "co2_kg_per_unit": 365.0,
-    "description": "Auto-generated from emissions_matrix action eat_chicken_tenders_daily",
-    "emissions_matrix": {
+    },
+    {
+      "name": "eat_chicken_tenders_daily",
       "one_person_day": 1.0,
       "twenty_person_day": 20.0,
       "all_day": 8000000000.0,
@@ -73,15 +51,9 @@
       "twenty_person_50_y": 365.0,
       "all_50_y": 146400000000.0,
       "ppm_all_50_y": 18.75
-    }
-  },
-  {
-    "id": "eat_fruit_bowl_daily",
-    "name": "Eat fruit bowl daily",
-    "category": "food",
-    "co2_kg_per_unit": 146.0,
-    "description": "Auto-generated from emissions_matrix action eat_fruit_bowl_daily",
-    "emissions_matrix": {
+    },
+    {
+      "name": "eat_fruit_bowl_daily",
       "one_person_day": 0.4,
       "twenty_person_day": 8.0,
       "all_day": 3200000000.0,
@@ -92,15 +64,9 @@
       "twenty_person_50_y": 146.0,
       "all_50_y": 58400000000.0,
       "ppm_all_50_y": 7.5
-    }
-  },
-  {
-    "id": "eat_pbj_sandwich_daily",
-    "name": "Eat pbj sandwich daily",
-    "category": "food",
-    "co2_kg_per_unit": 183.0,
-    "description": "Auto-generated from emissions_matrix action eat_pbj_sandwich_daily",
-    "emissions_matrix": {
+    },
+    {
+      "name": "eat_pbj_sandwich_daily",
       "one_person_day": 0.5,
       "twenty_person_day": 10.0,
       "all_day": 4000000000.0,
@@ -111,15 +77,9 @@
       "twenty_person_50_y": 183.0,
       "all_50_y": 73200000000.0,
       "ppm_all_50_y": 9.5
-    }
-  },
-  {
-    "id": "fly_747_longhaul_yearly",
-    "name": "Fly 747 longhaul yearly",
-    "category": "transport",
-    "co2_kg_per_unit": 1200.0,
-    "description": "Auto-generated from emissions_matrix action fly_747_longhaul_yearly",
-    "emissions_matrix": {
+    },
+    {
+      "name": "fly_747_longhaul_yearly",
       "one_person_day": 3.29,
       "twenty_person_day": 65.8,
       "all_day": 26250000000.0,
@@ -131,5 +91,5 @@
       "all_50_y": 480000000000.0,
       "ppm_all_50_y": 61.5
     }
-  }
-]
+  ]
+}

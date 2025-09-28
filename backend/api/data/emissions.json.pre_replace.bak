@@ -1,0 +1,66 @@
+[
+  {
+    "id": "car_gasoline",
+    "name": "Gasoline car (per km)",
+    "category": "vehicle",
+    "co2_kg_per_unit": 0.192,
+    "description": "Approx kg CO2 emitted per vehicle-km for an average gasoline car",
+    "emissions_matrix": {
+      "one_person_day": 8.4,
+      "twenty_person_day": 168.0,
+      "all_day": 26880000000.0,
+      "one_person_year": 3.066,
+      "twenty_person_year": 61.32,
+      "all_year": 98300000000.0,
+      "one_person_50_y": 153.3,
+      "twenty_person_50_y": 3066.0,
+      "all_50_y": 489600000000.0,
+      "ppm_all_50_y": 62.8
+    }
+  },
+  {
+    "id": "beef_steak",
+    "name": "Beef (per serving)",
+    "category": "food",
+    "co2_kg_per_unit": 27.0,
+    "description": "kg CO2 per typical serving of beef (life-cycle)",
+    "emissions_matrix": {
+      "one_person_day": 3.2,
+      "twenty_person_day": 64.0,
+      "all_day": 10240000000.0,
+      "one_person_year": 1.168,
+      "twenty_person_year": 23.36,
+      "all_year": 37400000000.0,
+      "one_person_50_y": 58.4,
+      "twenty_person_50_y": 1168.0,
+      "all_50_y": 186900000000.0,
+      "ppm_all_50_y": 24.0
+    }
+  },
+  {
+    "id": "plane_flight",
+    "name": "Short flight (per passenger, one-way)",
+    "category": "transport",
+    "co2_kg_per_unit": 150.0,
+    "description": "Approx emissions for a short-haul flight per passenger",
+    "emissions_matrix": {
+      "one_person_day": 3.29,
+      "twenty_person_day": 65.8,
+      "all_day": 10500000000.0,
+      "one_person_year": 1.2,
+      "twenty_person_year": 24.0,
+      "all_year": 3840000000.0,
+      "one_person_50_y": 60.0,
+      "twenty_person_50_y": 1200.0,
+      "all_50_y": 192000000000.0,
+      "ppm_all_50_y": 24.6
+    }
+  },
+  {
+    "id": "plastic_bottle",
+    "name": "Plastic water bottle (1)",
+    "category": "product",
+    "co2_kg_per_unit": 0.1,
+    "description": "Embodied emissions per single-use plastic bottle"
+  }
+]
