@@ -37,7 +37,7 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
       const parsed = JSON.parse(savedUser);
       setUserId(parsed.user_id);
 
-      fetch(`http://127.0.0.1:8000/items/${parsed.user_id}`)
+      fetch(`https://mhacks-2025.onrender.com/items/${parsed.user_id}`)
         .then((res) => res.json())
         .then((data) => setUserItems(data.items || {}))
         .catch(() => setUserItems({}));
@@ -46,7 +46,7 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/login", {
+      const res = await fetch("https://mhacks-2025.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -55,7 +55,7 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
       if (res.ok && data.status === "ok") {
         setUserId(data.user_id);
         localStorage.setItem("carbonscapeUser", JSON.stringify(data));
-        fetch(`http://127.0.0.1:8000/items/${data.user_id}`)
+        fetch(`https://mhacks-2025.onrender.com/items/${data.user_id}`)
           .then((r) => r.json())
           .then((d) => setUserItems(d.items || {}));
         setError("");
@@ -69,7 +69,7 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
 
   const handleSignup = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/signup", {
+      const res = await fetch("https://mhacks-2025.onrender.com/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),
@@ -89,7 +89,9 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
 
   const handlePredict = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/projection/${userId}`);
+      const res = await fetch(
+        `https://mhacks-2025.onrender.com/projection/${userId}`
+      );
       const data = await res.json();
       if (res.ok) {
         localStorage.setItem(
@@ -107,13 +109,16 @@ export default function HazardModal({ isOpen, onClose, setProjection }) {
   const handleAddItem = async () => {
     if (!selectedItem || !newCount) return;
     try {
-      const res = await fetch(`http://127.0.0.1:8000/items/${userId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          items: { [selectedItem]: parseFloat(newCount) },
-        }),
-      });
+      const res = await fetch(
+        `https://mhacks-2025.onrender.comitems/${userId}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: { [selectedItem]: parseFloat(newCount) },
+          }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setUserItems(data.items);

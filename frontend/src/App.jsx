@@ -42,7 +42,7 @@ export default function App() {
     if (savedUser) {
       const { user_id } = JSON.parse(savedUser);
 
-      fetch(`http://127.0.0.1:8000/projections/${user_id}`)
+      fetch(`https://mhacks-2025.onrender.com/projections/${user_id}`)
         .then((res) => {
           if (!res.ok) throw new Error("No projection found");
           return res.json();

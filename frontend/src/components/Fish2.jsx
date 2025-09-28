@@ -1,31 +1,3 @@
-// // src/components/Fish2.jsx
-// import { useRef, useState } from "react";
-// import { useFrame } from "@react-three/fiber";
-// import { useGLTF } from "@react-three/drei";
-
-// export default function Fish2({ isPaused }) {
-//   const ref = useRef();
-//   const { scene } = useGLTF("/models/Fish2.glb");
-
-//   const [time, setTime] = useState(0);
-
-//   useFrame((_, delta) => {
-//     if (!ref.current) return;
-//     if (!isPaused) setTime((t) => t + delta);
-
-//     const r = 1.5;
-//     const speed = 0.8;
-
-//     const x = Math.cos(time * speed) * r;
-//     const z = Math.sin(time * speed) * r;
-
-//     ref.current.position.set(x, -0.01, z);
-//     ref.current.rotation.y = -time * speed;
-//   });
-
-//   return <primitive ref={ref} object={scene} scale={0.003} />;
-// }
-
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";

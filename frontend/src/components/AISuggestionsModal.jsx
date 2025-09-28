@@ -22,7 +22,7 @@ export default function AISuggestionsModal({
     setAlertMsg("");
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/ai_suggestions/${userId}?year=${currentYear}`
+        `https://mhacks-2025.onrender.com/ai_suggestions/${userId}?year=${currentYear}`
       );
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
@@ -45,7 +45,7 @@ export default function AISuggestionsModal({
     setAlertMsg("");
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/take_action/${userId}`,
+        `https://mhacks-2025.onrender.com/take_action/${userId}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
