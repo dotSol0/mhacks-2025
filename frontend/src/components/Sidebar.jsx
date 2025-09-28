@@ -5,7 +5,7 @@ import HazardModal from "./HazardModal";
 import AISuggestionsModal from "./AISuggestionsModal";
 import HeartModal from "./HeartModal";
 
-export default function Sidebar({ currentYear }) {
+export default function Sidebar({ currentYear, setProjection }) {
   const [isHazardOpen, setHazardOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const [isAISuggestionsOpen, setAISuggestionsOpen] = useState(false);
@@ -36,12 +36,12 @@ export default function Sidebar({ currentYear }) {
           onClick={() => setHazardOpen(true)}
         />
 
-        <FaRobot
+        {/* <FaRobot
           size={28}
           color="#2E8B57"
           cursor="pointer"
           onClick={() => setAISuggestionsOpen(true)}
-        />
+        /> */}
 
         <FaHeart
           size={28}
@@ -53,8 +53,8 @@ export default function Sidebar({ currentYear }) {
       <HazardModal
         isOpen={isHazardOpen}
         onClose={() => setHazardOpen(false)}
-        userData={userData}
         setUserData={setUserData}
+        setProjection={setProjection}
       />
       <AISuggestionsModal
         isOpen={isAISuggestionsOpen}

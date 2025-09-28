@@ -1,24 +1,8 @@
-import { useState, useEffect } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
-import sampleProjection from "../../public/sampleProjection.json";
+// src/components/Controls.jsx
+import { useEffect } from "react";
 
-export default function Controls({ currentYear, setCurrentYear }) {
-  const [isPaused, setIsPaused] = useState(false);
-
-  const years = Object.keys(sampleProjection.projection);
-
-  useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(() => {
-        setCurrentYear((prev) => {
-          const idx = years.indexOf(prev);
-          return years[(idx + 1) % years.length];
-        });
-      }, 4000);
-      return () => clearInterval(interval);
-    }
-  }, [isPaused]);
-
+// src/components/Controls.jsx
+export default function Controls({ currentYear, setCurrentYear, years }) {
   const currentIndex = years.indexOf(currentYear);
 
   return (
@@ -54,19 +38,6 @@ export default function Controls({ currentYear, setCurrentYear }) {
           boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
         }}
       >
-        <button
-          onClick={() => setIsPaused((p) => !p)}
-          style={{
-            border: "none",
-            background: "transparent",
-            color: "#2E8B57",
-            cursor: "pointer",
-            fontSize: "20px",
-          }}
-        >
-          {isPaused ? <FaPlay /> : <FaPause />}
-        </button>
-
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           {years.map((year, i) => (
             <div

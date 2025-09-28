@@ -1,16 +1,16 @@
+// src/components/HeartModal.jsx
 import React from "react";
-import sampleProjection from "../../public/sampleProjection.json";
 
-export default function HeartModal({ isOpen, currentYear }) {
+export default function HeartModal({ isOpen, currentYear, projection }) {
   if (!isOpen) return null;
 
-  const currentData = sampleProjection.projection[currentYear];
-  const animals = currentData.animals;
+  const currentData = projection?.[currentYear] || null;
+  const animals = currentData?.animals || {};
 
   const getBarColor = (value) => {
     if (value > 0.7) return "#2E8B57";
-    if (value > 0.3) return "#FFD700";
-    return "#FF6347";
+    if (value > 0.3) return "#2E8B57";
+    return "#2E8B57";
   };
 
   return (
@@ -23,7 +23,7 @@ export default function HeartModal({ isOpen, currentYear }) {
         background: "#013220",
         borderRadius: "12px",
         padding: "16px",
-        color: "white",
+        color: "#2E8B57",
         boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
         zIndex: 1000,
       }}
@@ -39,40 +39,48 @@ export default function HeartModal({ isOpen, currentYear }) {
         Animal Health – {currentYear}
       </h3>
 
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-        {Object.entries(animals).map(([animal, health]) => (
-          <li key={animal} style={{ marginBottom: "12px" }}>
-            <span
-              style={{
-                display: "block",
-                marginBottom: "4px",
-                fontSize: "14px",
-                textTransform: "capitalize",
-              }}
-            >
-              {animal}
-            </span>
-            <div
-              style={{
-                background: "#2F4F4F",
-                borderRadius: "6px",
-                height: "10px",
-                width: "100%",
-              }}
-            >
+      {Object.keys(animals).length === 0 ? (
+        <p style={{ color: "#2E8B57", textAlign: "center" }}>
+          No data available.
+        </p>
+      ) : (
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {Object.entries(animals).map(([animal, health]) => (
+            <li key={animal} style={{ marginBottom: "12px" }}>
+              <span
+                style={{
+                  display: "block",
+                  marginBottom: "4px",
+                  fontSize: "14px",
+                  textTransform: "capitalize",
+                  color: "#2E8B57",
+                }}
+              >
+                {animal}
+              </span>
               <div
                 style={{
-                  height: "100%",
-                  width: `${health * 100}%`,
-                  background: getBarColor(health),
+                  background: "#013220",
                   borderRadius: "6px",
-                  transition: "width 0.4s ease",
+                  height: "10px",
+                  width: "100%",
+                  border: "1px solid #2E8B57",
                 }}
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
+              >
+                <div
+                  style={{
+                    height: "100%",
+                    width: `${(health || 0) * 100}%`,
+                    background: getBarColor(health || 0),
+                    borderRadius: "6px",
+                    transition: "width 0.4s ease",
+                  }}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
