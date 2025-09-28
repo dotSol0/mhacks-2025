@@ -1,0 +1,77 @@
+{
+  "userItems": {
+    "car": 2,
+    "refrigerator": 1,
+    "ac": 1
+  },
+  "projection": {
+    "2025": {
+      "carbonScore": 80,
+      "trees": 0,
+      "animals": {
+        "deer": 1.0,
+        "fox": 1.0,
+        "bird": 1.0,
+        "fish": 1.0
+      },
+      "lake": { "color": "#1E90FF", "clarity": 1.0 },
+      "sky": { "fog": 0.01, "color": "#87CEEB" },
+      "suggestions": [
+        "Switch one car to carpooling or public transport.",
+        "Optimize refrigerator usage with eco settings.",
+        "Reduce AC runtime during moderate weather."
+      ]
+    },
+    "2030": {
+      "carbonScore": 65,
+      "trees": 15,
+      "animals": {
+        "deer": 0.7,
+        "fox": 0.8,
+        "bird": 0.6,
+        "fish": 0.9
+      },
+      "lake": { "color": "#3CB371", "clarity": 0.8 },
+      "sky": { "fog": 0.03, "color": "#A9C9FF" },
+      "suggestions": [
+        "Upgrade to an electric or hybrid car.",
+        "Switch to renewable energy sources at home.",
+        "Use smart thermostats to cut AC consumption."
+      ]
+    },
+    "2040": {
+      "carbonScore": 40,
+      "trees": 40,
+      "animals": {
+        "deer": 0.3,
+        "fox": 0.5,
+        "bird": 0.2,
+        "fish": 0.5
+      },
+      "lake": { "color": "#8B4513", "clarity": 0.5 },
+      "sky": { "fog": 0.06, "color": "#B0A58C" },
+      "suggestions": [
+        "Cut down to one shared vehicle or fully switch to EV.",
+        "Adopt solar panels and green energy plans.",
+        "Invest in efficient building insulation and cooling."
+      ]
+    },
+    "2050": {
+      "carbonScore": 10,
+      "trees": 80,
+      "animals": {
+        "deer": 0.0,
+        "fox": 0.0,
+        "bird": 0.0,
+        "fish": 0.2
+      },
+      "lake": { "color": "#2F4F4F", "clarity": 0.2 },
+      "sky": { "fog": 0.1, "color": "#696969" },
+      "suggestions": [
+        "Radically reduce private transport use.",
+        "Shift completely to renewable and low-energy appliances.",
+        "Participate in reforestation and conservation programs."
+      ]
+    }
+  }
+}
